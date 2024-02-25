@@ -1,16 +1,13 @@
-import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
-
-
-
-
+import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
+import History from "../pages/History";
 
 const routes = createBrowserRouter([
   {
-    path: '/',
-    element: <App/>,
+    path: "/",
+    element: <App />,
     // children: [
     //   {
     //     index: true,
@@ -31,12 +28,16 @@ const routes = createBrowserRouter([
     // ],
   },
   {
-    path: '/login',
+    path: "/login",
     element: <SignIn />,
   },
   {
-    path: '/signup',
+    path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/history",
+    element: <History />,
   },
   // {
   //   path: '*',
