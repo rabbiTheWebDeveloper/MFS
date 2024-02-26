@@ -1,8 +1,11 @@
 import { GiReceiveMoney, GiTakeMyMoney } from "react-icons/gi";
 import { IoIosSend } from "react-icons/io";
 import { MdManageHistory } from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
+import { MdOutlineRealEstateAgent } from "react-icons/md";
 import { SiMoneygram } from "react-icons/si";
 import { TbDeviceMobileDollar } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const User = () => {
   return (
@@ -11,16 +14,30 @@ const User = () => {
         <div className="w-[90%] tab:w-[550px] p-5 tab:p-10 rounded-xl shadow-md bg-white">
           <div className="mb-7 flex items-center justify-between">
             <h3 className=" font-bold text-lg text-primary-text">
-              Your Balance <span className="text-primary-color">200Tk</span>
+              Your Balance <span className="text-primary-color">***</span>
             </h3>
+            <Link
+              to="/users-list"
+              className="flex flex-col items-center gap-1 hover:text-primary-color"
+            >
+              <FaRegUserCircle className="text-2xl" />
+              <span className="text-xs font-medium">User</span>
+            </Link>
+            <Link
+              to="/agents-list"
+              className="flex flex-col items-center gap-1 hover:text-primary-color"
+            >
+              <MdOutlineRealEstateAgent className="text-2xl" />
+              <span className="text-xs font-medium">Agent</span>
+            </Link>
 
-            <a
-              href="/history"
+            <Link
+              to="/history"
               className="flex flex-col items-center gap-1 hover:text-primary-color"
             >
               <MdManageHistory className="text-2xl" />
               <span className="text-xs font-medium">History</span>
-            </a>
+            </Link>
           </div>
 
           {/* tab */}
@@ -74,6 +91,79 @@ const User = () => {
 
           {/* tab form  */}
           <div className="">
+            <form action="" className="mt-5">
+              <div className="">
+                <div className="mt-4">
+                  <label
+                    htmlFor=""
+                    className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
+                  >
+                    Mobile number
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter mobile number"
+                    className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
+                  />
+                </div>
+
+                <div className="mt-4">
+                  <label
+                    htmlFor=""
+                    className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
+                  >
+                    Amount
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter mobile number"
+                    className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
+                  />
+                </div>
+
+                <div className="mt-4">
+                  <label
+                    htmlFor=""
+                    className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
+                  >
+                    Pin number
+                  </label>
+                  <div className="flex items-center justify-between gap-3">
+                    <input
+                      type="text"
+                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
+                    />
+                    <input
+                      type="text"
+                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
+                    />
+                    <input
+                      type="text"
+                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
+                    />
+                    <input
+                      type="text"
+                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
+                    />
+                    <input
+                      type="text"
+                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <button
+                    type="submit"
+                    className="bg-primary-color py-2 tab:py-2.5 px-5 rounded-lg text-white font-medium text-lg w-full hover:bg-hover-color"
+                  >
+                    Pay
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+              <div className="">
             <form action="" className="mt-5">
               <div className="">
                 <div className="mt-4">

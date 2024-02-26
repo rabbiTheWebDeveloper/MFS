@@ -3,6 +3,8 @@ import App from "../App";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import History from "../pages/History";
+import UserList from "../pages/UserList";
+import AgentList from "../pages/AgentList";
 
 const routes = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ const routes = createBrowserRouter([
   {
     path: "/history",
     element: <History />,
+  },
+  {
+    path: "/users-list",
+    element: <UserList />,
+  },
+  {
+    path: "/agents-list",
+    element: <AgentList />,
   },
   // {
   //   path: '*',
