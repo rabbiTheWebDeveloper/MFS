@@ -173,14 +173,14 @@ const User = () => {
               </h5>
             </div> */}
             {/* item */}
-            {/* <div className="text-center cursor-pointer">
+            <div className="text-center cursor-pointer">
               <div className="bg-light-color p-2 rounded-lg text-primary-color  w-20 h-16 text-4xl flex items-center justify-center m-auto">
                 <SiMoneygram />
               </div>
               <h5 className="text-xs font-bold mt-2 text-primary-text">
-                Transfer
+                Transfer Money User
               </h5>
-            </div> */}
+            </div>
           </div>
 
           {/* tab form  */}

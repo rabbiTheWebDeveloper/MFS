@@ -7,7 +7,7 @@ export const agentApi = baseApi.injectEndpoints({
         method: "POST",
         data: regData
       }),
-      providesTags: ["balance"],
+      invalidatesTags: ["balance-recharge"],
       // invalidatesTags: ["user"]
     }),
     balanceRequestList: build.query({
@@ -15,7 +15,7 @@ export const agentApi = baseApi.injectEndpoints({
         url: `/balance-recharge/`,
         method: "GET",
       }),
-      providesTags: ["history"],
+      providesTags: ["balance-recharge"],
     }),
 
   }),
