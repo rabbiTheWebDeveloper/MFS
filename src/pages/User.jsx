@@ -171,9 +171,9 @@ const User = () => {
 
             {role === "Admin" && (
               <>
-                <div className="text-center cursor-pointer" onClick={() => setTab("Transfer from User")}>
+                <div className="text-center cursor-pointer" onClick={() => setTab("Transfer from Admin to User")}>
                   <div className={`${
-                      tab === "Transfer from User"
+                      tab === "Transfer from Admin to User"
                         ? "bg-primary-color text-white"
                         : "bg-light-color text-primary-color "
                     } p-2 rounded-lg w-20 h-16 text-4xl flex items-center justify-center m-auto`}>

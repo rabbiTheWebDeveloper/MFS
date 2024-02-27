@@ -8,12 +8,18 @@ import {
   useSendMoneyMutation,
 } from "../../redux/api/commonApi";
 import { toast } from "react-toastify";
+import {
+  useCashOutAdminTOAgentMutation,
+  useCashOutAdminTOUserMutation,
+} from "../../redux/api/adminApi";
 
 const Form = ({ tab }) => {
   const [sendMoney] = useSendMoneyMutation();
   const [cashOutAgent] = useCashOutAgentMutation();
   const [cashOutAdmin] = useCashOutAdminMutation();
   const [cashInAgentToUser] = useCashInAgentToUserMutation();
+  const [cashOutAdminTOAgent] = useCashOutAdminTOAgentMutation();
+  const [cashOutAdminTOUser] = useCashOutAdminTOUserMutation();
   const {
     register,
     handleSubmit,
@@ -25,17 +31,21 @@ const Form = ({ tab }) => {
   const submitForm = async (formData) => {
     try {
       let res;
-      if(tab.length === '') {
+      if (tab.length === "") {
         return toast.error("Select an option Tab");
       }
       if (tab === "Send Money") {
         res = await sendMoney({ ...formData }).unwrap();
-      } else if (tab=== "Cash Out Agent") {
+      } else if (tab === "Cash Out Agent") {
         res = await cashOutAgent({ ...formData }).unwrap();
-      }else if (tab=== "Cash Out Admin") {
+      } else if (tab === "Cash Out Admin") {
         res = await cashOutAdmin({ ...formData }).unwrap();
-      }else if (tab=== "Transfer from User"){
+      } else if (tab === "Transfer from User") {
         res = await cashInAgentToUser({ ...formData }).unwrap();
+      } else if (tab === "Transfer from Agent") {
+        res = await cashOutAdminTOAgent({ ...formData }).unwrap();
+      } else if (tab === "Transfer from Admin to User") {
+        res = await cashOutAdminTOUser({ ...formData }).unwrap();
       }
       if (res?.success) {
         toast.success(res?.message);
@@ -45,7 +55,7 @@ const Form = ({ tab }) => {
       console.error(err.message);
     }
   };
-  
+
   return (
     <div className="">
       <form action="" className="mt-5" onSubmit={handleSubmit(submitForm)}>

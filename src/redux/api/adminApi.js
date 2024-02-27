@@ -54,9 +54,27 @@ export const adminApi = baseApi.injectEndpoints({
       providesTags: ["balance-recharge-list"],
 
     }),
+    cashOutAdminTOAgent: build.mutation({
+      query: (regData) => ({
+        url: `admin/cash-out-admin-to-agent`,
+        method: "POST",
+        data: regData
+      }),
+      // invalidatesTags: ["balance-recharge"],
+      // invalidatesTags: ["user"]
+    }),
+    cashOutAdminTOUser: build.mutation({
+      query: (regData) => ({
+        url: `admin/cash-out-admin-to-user`,
+        method: "POST",
+        data: regData
+      }),
+      // invalidatesTags: ["balance-recharge"],
+      // invalidatesTags: ["user"]
+    }),
 
   }),
 
 })
 
-export const { useUserStatusMutation, useAgentApproveMutation, useUserListQuery, useAgentListQuery, useRechargeAccepedMutation, useBalanceRechargeListQuery } = adminApi
+export const { useUserStatusMutation, useAgentApproveMutation, useCashOutAdminTOAgentMutation, useCashOutAdminTOUserMutation, useUserListQuery, useAgentListQuery, useRechargeAccepedMutation, useBalanceRechargeListQuery } = adminApi
