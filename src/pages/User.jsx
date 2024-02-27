@@ -26,6 +26,8 @@ const User = () => {
       setTab("Transfer from User");
     } else if (role === "User") {
       setTab("Send Money");
+    }{
+      setTab("Transfer from User");
     }
   }, []);
   return (
@@ -167,37 +169,26 @@ const User = () => {
               </>
             )}
 
-            {/* item */}
-            {/* <div className="text-center cursor-pointer">
-              <div className="bg-light-color p-2 rounded-lg text-primary-color  w-20 h-16 text-4xl flex items-center justify-center m-auto">
-                <TbDeviceMobileDollar />
-              </div>
-              <h5 className="text-xs font-bold mt-2 text-primary-text">
-                Recharge
-              </h5>
-            </div> */}
-            {/* item */}
-            {/* <div className="text-center cursor-pointer">
-              <div className="bg-light-color p-2 rounded-lg text-primary-color  w-20 h-16 text-4xl flex items-center justify-center m-auto">
-                <GiTakeMyMoney />
-              </div>
-              <h5 className="text-xs font-bold mt-2 text-primary-text">
-                Add Money
-              </h5>
-            </div> */}
-            {/* item */}
             {role === "Admin" && (
               <>
-                <div className="text-center cursor-pointer">
-                  <div className="bg-light-color p-2 rounded-lg text-primary-color  w-20 h-16 text-4xl flex items-center justify-center m-auto">
+                <div className="text-center cursor-pointer" onClick={() => setTab("Transfer from User")}>
+                  <div className={`${
+                      tab === "Transfer from User"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg w-20 h-16 text-4xl flex items-center justify-center m-auto`}>
                     <SiMoneygram />
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
                     Transfer Money User
                   </h5>
                 </div>
-                <div className="text-center cursor-pointer">
-                  <div className="bg-light-color p-2 rounded-lg text-primary-color  w-20 h-16 text-4xl flex items-center justify-center m-auto">
+                <div className="text-center cursor-pointer" onClick={() => setTab("Transfer from Agent")}>
+                  <div className={`${
+                      tab === "Transfer from Agent"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } w-20 h-16 text-4xl flex items-center justify-center m-auto`}>
                     <SiMoneygram />
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
