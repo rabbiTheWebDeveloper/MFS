@@ -8,28 +8,34 @@ import { TbDeviceMobileDollar } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Form from "../components/Form/Form";
 import Balance from "../components/Balance";
+import { isRole } from "../services/auth.service";
 
 const User = () => {
+  const role = isRole();
   return (
     <>
       <section className="min-h-screen w-screen flex  gap-2 items-center justify-center">
         <div className="w-[90%] tab:w-[550px] p-5 tab:p-10 rounded-xl shadow-md bg-white">
           <div className="mb-7 flex items-center justify-between">
-            <Balance/>
-            <Link
-              to="/users-list"
-              className="flex flex-col items-center gap-1 hover:text-primary-color"
-            >
-              <FaRegUserCircle className="text-2xl" />
-              <span className="text-xs font-medium">User</span>
-            </Link>
-            <Link
-              to="/agents-list"
-              className="flex flex-col items-center gap-1 hover:text-primary-color"
-            >
-              <MdOutlineRealEstateAgent className="text-2xl" />
-              <span className="text-xs font-medium">Agent</span>
-            </Link>
+            <Balance />
+            {role === "Admin" && (
+              <>
+                <Link
+                  to="/users-list"
+                  className="flex flex-col items-center gap-1 hover:text-primary-color"
+                >
+                  <FaRegUserCircle className="text-2xl" />
+                  <span className="text-xs font-medium">User</span>
+                </Link>
+                <Link
+                  to="/agents-list"
+                  className="flex flex-col items-center gap-1 hover:text-primary-color"
+                >
+                  <MdOutlineRealEstateAgent className="text-2xl" />
+                  <span className="text-xs font-medium">Agent</span>
+                </Link>
+              </>
+            )}
 
             <Link
               to="/history"

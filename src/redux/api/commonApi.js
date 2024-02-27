@@ -9,9 +9,16 @@ export const commonApi = baseApi.injectEndpoints({
       }),
       // invalidatesTags: ["user"]
     }),
+    history: build.query({
+      query: () => ({
+        url: `/transaction/transaction-list`,
+        method: "GET",
+      }),
+      providesTags: ["history"],
+    }),
 
   }),
 
 })
 
-export const {useBalanceMutation } = commonApi
+export const { useBalanceMutation , useHistoryQuery } = commonApi
