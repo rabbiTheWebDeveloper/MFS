@@ -1,19 +1,15 @@
 import FieldSet from "./FieldSet";
 import Field from "./Field";
 import { useForm } from "react-hook-form";
-import {
-  useCashInAgentToUserMutation,
-  useCashOutAdminMutation,
-  useCashOutAgentMutation,
-  useSendMoneyMutation,
-} from "../../redux/api/commonApi";
 import { toast } from "react-toastify";
+import {
+  useBalanceRequestListQuery,
+  useBalanceRequestMutation,
+} from "../../redux/api/agentApi";
 
 const RechargeFrom = ({ tab }) => {
-  const [sendMoney] = useSendMoneyMutation();
-  const [cashOutAgent] = useCashOutAgentMutation();
-  const [cashOutAdmin] = useCashOutAdminMutation();
-  const [cashInAgentToUser] = useCashInAgentToUserMutation();
+  const [balanceRequest] = useBalanceRequestMutation();
+  const { data } = useBalanceRequestListQuery();
   const {
     register,
     handleSubmit,
@@ -25,17 +21,11 @@ const RechargeFrom = ({ tab }) => {
   const submitForm = async (formData) => {
     try {
       let res;
-      if(tab.length === '') {
+      if (tab.length === "") {
         return toast.error("Select an option Tab");
       }
-      if (tab === "Send Money") {
-        res = await sendMoney({ ...formData }).unwrap();
-      } else if (tab=== "Cash Out Agent") {
-        res = await cashOutAgent({ ...formData }).unwrap();
-      }else if (tab=== "Cash Out Admin") {
-        res = await cashOutAdmin({ ...formData }).unwrap();
-      }else if (tab=== "Transfer from User"){
-        res = await cashInAgentToUser({ ...formData }).unwrap();
+      if (tab === "Balance-recharge") {
+        res = await balanceRequest({ ...formData }).unwrap();
       }
       if (res?.success) {
         toast.success(res?.message);
@@ -45,7 +35,8 @@ const RechargeFrom = ({ tab }) => {
       console.error(err.message);
     }
   };
-  
+
+  console.log("Toast", data);
   return (
     <div className="">
       <form action="" className="mt-5" onSubmit={handleSubmit(submitForm)}>
@@ -74,6 +65,44 @@ const RechargeFrom = ({ tab }) => {
           </FieldSet>
         </div>
       </form>
+
+      <div className="mt-5">
+        <h2 className="text-xl font-semibold mb-3">Transaction List</h2>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  ID
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  User ID
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Amount
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Timestamp
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {data?.data?.map((transaction) => (
+                <tr key={transaction._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">{transaction._id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{transaction.userId}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{transaction.amount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{transaction.status}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{new Date(transaction.timestamp).toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
