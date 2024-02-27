@@ -71,7 +71,7 @@ const SignUp = () => {
                 {...register("mobileNumber", {
                   required: " Phone is required.",
                 })}
-                type="number"
+                type="text"
                 id="mobileNumber"
                 name="mobileNumber"
                 placeholder="Enter mobile number"

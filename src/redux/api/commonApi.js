@@ -42,9 +42,17 @@ export const commonApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["balance"]
     }),
+    cashInAgentToUser: build.mutation({
+      query: (data) => ({
+        url: `/transaction/cash-in-agent`,
+        method: "POST",
+        data: data
+      }),
+      invalidatesTags: ["balance"]
+    }),
 
   }),
 
 })
 
-export const { useBalanceMutation , useHistoryQuery, useSendMoneyMutation , useCashOutAgentMutation , useCashOutAdminMutation } = commonApi
+export const { useBalanceMutation , useHistoryQuery, useSendMoneyMutation , useCashInAgentToUserMutation, useCashOutAgentMutation , useCashOutAdminMutation } = commonApi

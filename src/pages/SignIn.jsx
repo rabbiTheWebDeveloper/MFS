@@ -54,7 +54,7 @@ const SignIn = () => {
         <h2 className="text-3xl font-bold text-center text-primary-text">Login</h2>
         <form className="mt-5" onSubmit={handleSubmit(submitForm)}>
           <FieldSet>
-            {renderInputField("mobileNumber", "Mobile number", "number")}
+            {renderInputField("mobileNumber", "Mobile number", "text")}
             <Field label="Account Type" error={errors.accountType}>
               <select
                 {...register("accountType", { required: "Account Type is required." })}

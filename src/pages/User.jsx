@@ -11,13 +11,24 @@ import { Link } from "react-router-dom";
 import Form from "../components/Form/Form";
 import Balance from "../components/Balance";
 import { getUserInfo, isRole } from "../services/auth.service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogOut from "../components/LogOut";
+import RechargeFrom from "../components/Form/RechargeFrom";
 
 const User = () => {
-  const [tab, setTab] = useState("Send");
+  const [tab, setTab] = useState("");
   const role = isRole();
   const user = getUserInfo();
+
+  useEffect (() => {
+    if (role === "Agent") {
+      setTab("Transfer from User");
+
+    }else if( role === "User") {
+      setTab("Send Money");
+    }
+  
+  },[])
   return (
     <>
       <section className="min-h-screen w-screen flex  gap-2 items-center justify-center">
@@ -64,76 +75,85 @@ const User = () => {
             {/* item */}
             {role === "Agent" && (
               <>
-                <div className="text-center cursor-pointer">
-                  <div className="bg-light-color p-2 rounded-lg text-primary-color  w-20 h-16 text-4xl flex items-center justify-center m-auto">
+                <div className="text-center cursor-pointer" onClick={() => setTab("Transfer from User")}>
+                  <div className={`${ tab === "Transfer from User"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "} p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}>
                     <SiMoneygram />
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
-                    Transfer
+                    Transfer from User
                   </h5>
                 </div>
-                <div className="text-center cursor-pointer">
-                  <div className="bg-light-color p-2 rounded-lg text-primary-color  w-20 h-16 text-4xl flex items-center justify-center m-auto">
+                <div className="text-center cursor-pointer" onClick={() => setTab("Balance-recharge")}>
+                  <div className={`${ tab === "Balance-recharge"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "} p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}>
                     <MdOutlineAccountBalance />
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
-                    Balance Recharge
+                    Balance-recharge
                   </h5>
                 </div>
               </>
             )}
-            <div
-              className="text-center cursor-pointer"
-              onClick={() => setTab("Send Money")}
-            >
-              <div
-                className={`${
-                  tab === "Send Money"
-                    ? "bg-primary-color text-white"
-                    : "bg-light-color text-primary-color "
-                } p-2 rounded-lg  w-20 h-16 text-4xl flex items-center justify-center m-auto`}
-              >
-                <IoIosSend />
-              </div>
-              <h5 className="text-xs font-bold mt-2 text-primary-text">
-                Send Money
-              </h5>
-            </div>
-            {/* item */}
-            <div
-              className="text-center cursor-pointer"
-              onClick={() => setTab("Cash Out Agent")}
-            >
-              <div
-                className={`${
-                  tab === "Cash Out Agent"
-                    ? "bg-primary-color text-white"
-                    : "bg-light-color text-primary-color "
-                } p-2 rounded-lg  w-20 h-16 text-4xl flex items-center justify-center m-auto`}
-              >
-                <GiReceiveMoney />
-              </div>
-              <h5 className="text-xs font-bold mt-2 text-primary-text">
-                Cash out Agent
-              </h5>
-            </div>
-            <div
-              className="text-center cursor-pointer"
-              onClick={() => setTab("Cash Out Admin")}
-            >
-              <div
-                className={`${
-                  tab === "Cash Out Admin"
-                    ? "bg-primary-color text-white"
-                    : "bg-light-color text-primary-color "
-                } p-2 rounded-lg  w-20 h-16 text-4xl flex items-center justify-center m-auto`}
-              >
-                <GiReceiveMoney />
-              </div>
-              <h5 className="text-xs font-bold mt-2 text-primary-text">
-                Cash out Admin
-              </h5>
-            </div>
+            {role === "User" && (
+              <>
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Send Money")}
+                >
+                  <div
+                    className={`${
+                      tab === "Send Money"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg  w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
+                    <IoIosSend />
+                  </div>
+                  <h5 className="text-xs font-bold mt-2 text-primary-text">
+                    Send Money
+                  </h5>
+                </div>
+                {/* item */}
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Cash Out Agent")}
+                >
+                  <div
+                    className={`${
+                      tab === "Cash Out Agent"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg  w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
+                    <GiReceiveMoney />
+                  </div>
+                  <h5 className="text-xs font-bold mt-2 text-primary-text">
+                    Cash out Agent
+                  </h5>
+                </div>
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Cash Out Admin")}
+                >
+                  <div
+                    className={`${
+                      tab === "Cash Out Admin"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg  w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
+                    <GiReceiveMoney />
+                  </div>
+                  <h5 className="text-xs font-bold mt-2 text-primary-text">
+                    Cash out Admin
+                  </h5>
+                </div>
+              </>
+            )}
+
             {/* item */}
             {/* <div className="text-center cursor-pointer">
               <div className="bg-light-color p-2 rounded-lg text-primary-color  w-20 h-16 text-4xl flex items-center justify-center m-auto">
@@ -164,7 +184,10 @@ const User = () => {
           </div>
 
           {/* tab form  */}
-          <Form tab={tab} />
+          {
+            tab === "Balance-recharge" ? <RechargeFrom tab={tab} />: <Form tab={tab} />
+          }
+         
         </div>
       </section>
     </>
