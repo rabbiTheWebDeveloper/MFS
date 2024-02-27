@@ -1,33 +1,44 @@
 import FieldSet from "./FieldSet";
 import Field from "./Field";
 import { useForm } from "react-hook-form";
+import {
+  useCashOutAgentMutation,
+  useSendMoneyMutation,
+} from "../../redux/api/commonApi";
+import { toast } from "react-toastify";
 
-const Form = () => {
+const Form = ({ tab }) => {
+  const [sendMoney] = useSendMoneyMutation();
+  const [cashOutAgent] = useCashOutAgentMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
     // setError,
   } = useForm();
 
-  const submitForm = (formData) => {
-    console.log(formData);
-    // const user = {email: 'x@example.com', password: '123456789'}
-
-    // const found = formData.email === user.email && formData.password === user.password;
-
-    // if (!found) {
-    //     setError("root.random", {
-    //         message: `User with email '${formData.email}' is not found`,
-    //         type: "random"
-    //     })
-    // }
+  const submitForm = async (formData) => {
+    try {
+      let res;
+      if (tab === "Send Money") {
+        res = await sendMoney({ ...formData }).unwrap();
+      } else if (tab=== "Cash Out Agent") {
+        res = await cashOutAgent({ ...formData }).unwrap();
+      }
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+      reset();
+    } catch (err) {
+      console.error(err.message);
+    }
   };
   return (
     <div className="">
       <form action="" className="mt-5" onSubmit={handleSubmit(submitForm)}>
         <div className="">
-          <FieldSet label="Mobile Recharge">
+          <FieldSet label={tab}>
             <Field label=" Mobile number" error={errors.receiverId}>
               <input
                 {...register("receiverId", {
@@ -43,7 +54,7 @@ const Form = () => {
 
             <Field label="Amount" error={errors.amount}>
               <input
-                 {...register("amount", {
+                {...register("amount", {
                   required: "Receiver Phone is required.",
                 })}
                 type="number"
@@ -56,7 +67,7 @@ const Form = () => {
 
             <Field label="Pin number" error={errors.pin}>
               <input
-                 {...register("pin", {
+                {...register("pin", {
                   required: "Pin Number is required.",
                 })}
                 type="password"

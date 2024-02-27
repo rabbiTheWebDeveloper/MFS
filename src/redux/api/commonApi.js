@@ -7,6 +7,7 @@ export const commonApi = baseApi.injectEndpoints({
         method: "POST",
         // data: regData
       }),
+      providesTags: ["balance"],
       // invalidatesTags: ["user"]
     }),
     history: build.query({
@@ -17,8 +18,33 @@ export const commonApi = baseApi.injectEndpoints({
       providesTags: ["history"],
     }),
 
+    sendMoney: build.mutation({
+      query: (data) => ({
+        url: `/transaction/sentMoney`,
+        method: "POST",
+        data: data
+      }),
+      invalidatesTags: ["balance"]
+    }),
+    cashOutAgent: build.mutation({
+      query: (data) => ({
+        url: `/transaction/cashOut`,
+        method: "POST",
+        data: data
+      }),
+      invalidatesTags: ["balance"]
+    }),
+    cashOutAdmin: build.mutation({
+      query: (data) => ({
+        url: `/transaction/sentMoney`,
+        method: "POST",
+        data: data
+      }),
+      invalidatesTags: ["balance"]
+    }),
+
   }),
 
 })
 
-export const { useBalanceMutation , useHistoryQuery } = commonApi
+export const { useBalanceMutation , useHistoryQuery, useSendMoneyMutation , useCashOutAgentMutation , useCashOutAdminMutation } = commonApi
