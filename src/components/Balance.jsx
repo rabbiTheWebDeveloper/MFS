@@ -1,8 +1,9 @@
 import  { useState, useEffect } from "react";
 import { useBalanceMutation } from "../redux/api/commonApi";
+import { toast } from "react-toastify";
 
 const Balance = () => {
-  const [balanceMutation] = useBalanceMutation();
+  const [balanceMutation ] = useBalanceMutation();
   const [balance, setBalance] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,6 +15,7 @@ const Balance = () => {
       setBalance(data.data.balance);
     } catch (error) {
       setError(error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }

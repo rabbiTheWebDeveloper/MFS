@@ -5,6 +5,8 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineRealEstateAgent } from "react-icons/md";
 import { SiMoneygram } from "react-icons/si";
 import { MdOutlineAccountBalance } from "react-icons/md";
+import { IoCashOutline } from "react-icons/io5";
+import { BiMoneyWithdraw } from "react-icons/bi";
 
 // import { TbDeviceMobileDollar } from "react-icons/tb";
 import { Link } from "react-router-dom";
@@ -108,6 +110,42 @@ const User = () => {
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
                     Balance-recharge
+                  </h5>
+                </div>
+
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Cash Request")}
+                >
+                  <div
+                    className={`${
+                      tab === "Cash Request"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
+                     <IoCashOutline />
+                  </div>
+                  <h5 className="text-xs font-bold mt-2 text-primary-text">
+                   Cash Request
+                  </h5>
+                </div>
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Withdraw request")}
+                >
+                  <div
+                    className={`${
+                      tab === "Withdraw request"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
+                   
+                    <BiMoneyWithdraw />
+                  </div>
+                  <h5 className="text-xs font-bold mt-2 text-primary-text">
+                  Withdraw request 
                   </h5>
                 </div>
               </>

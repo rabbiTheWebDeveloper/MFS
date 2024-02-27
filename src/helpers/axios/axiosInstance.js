@@ -35,14 +35,17 @@ instance.interceptors.response.use(
     return responseObject;
   },
   async function (error) {
+    const errorResponse = error?.response.data;
+    console.log(errorResponse);
     if (error?.response?.status === 403) {} else {
       const responseObject = {
-        statusCode: error?.response?.data || 500,
-        message: error?.response || "Something went wrong",
-        errorMessages: error?.response,
+        statusCode: error?.response?.data.success || 500,
+        message: error?.response.data.message || "Something went wrong",
+        errorMessages: error?.response.data.message ,
       };
       return responseObject;
     }
+    // return  errorResponse
 
     // return Promise.reject(error);
   }
