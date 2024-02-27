@@ -14,6 +14,7 @@ import { getUserInfo, isRole } from "../services/auth.service";
 import { useEffect, useState } from "react";
 import LogOut from "../components/LogOut";
 import RechargeFrom from "../components/Form/RechargeFrom";
+import RechargeFromList from "../components/Form/RechargeFromList";
 
 const User = () => {
   const [tab, setTab] = useState("");
@@ -203,14 +204,35 @@ const User = () => {
                     Transfer Money Agent
                   </h5>
                 </div>
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Balance-recharge List")}
+                >
+                  <div
+                    className={`${
+                      tab === "Balance-recharge List"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
+                    <MdOutlineAccountBalance />
+                  </div>
+                  <h5 className="text-xs font-bold mt-2 text-primary-text">
+                    Balance-recharge
+                  </h5>
+                </div>
               </>
             )}
           </div>
 
           {/* tab form  */}
+          {tab === "Balance-recharge List" && (
+            <RechargeFromList/>
+          )}
           {tab === "Balance-recharge" ? (
             <RechargeFrom tab={tab} />
           ) : (
+           !( tab === "Balance-recharge List") &&
             <Form tab={tab} />
           )}
         </div>

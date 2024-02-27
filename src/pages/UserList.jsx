@@ -1,4 +1,25 @@
+import { toast } from "react-toastify";
+import { useUserListQuery, useUserStatusMutation } from "../redux/api/adminApi";
+
 const UserList = () => {
+  const { data } = useUserListQuery();
+  const userList = data?.data;
+  const [userStatus] = useUserStatusMutation();
+  const handleChange = async (event, id) => {
+    try {
+      const { checked: value } = event.target;
+      const data = {
+        active: value,
+      };
+      const response = await userStatus({ id, body: data }).unwrap();
+      if (response?.success) {
+        toast.success(response.message);
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+      toast.error("An error occurred while processing your request.");
+    }
+  };
   return (
     <>
       <section className="min-h-screen w-screen flex flex-wrap gap-2 items-center justify-center">
@@ -9,59 +30,32 @@ const UserList = () => {
 
           <div className="">
             <ul>
-              <li className="flex items-start justify-between border-b border-secondary-text pb-2 mb-2 last:pb-0 last:mb-0 last:border-none">
-                <div className="flex flex-col gap-.5">
-                  <h5 className="text-lg text-secondary-text font-semibold">
-                    Receive Money
-                  </h5>
-                  <p className="text-sm font-bold text-primary-text">Rasel</p>
-                  <p className=" text-sm font-bold text-primary-text">
-                    01683311917
-                  </p>
-                </div>
-                <h4 className="text-lg font-bold text-primary-color">244 tk</h4>
-                {/* <h4 className="text-lg font-bold text-primary-color">244 tk</h4> */}
-
-                <label className="inline-flex items-center cursor-pointer">
-                  <input type="checkbox" value="" className="sr-only peer" />
-                  <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                  {/* <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Checked toggle</span> */}
-                </label>
-              </li>
-              <li className="flex items-start justify-between border-b border-secondary-text pb-2 mb-2">
-                <div className="flex flex-col gap-.5">
-                  <h5 className="text-lg text-secondary-text font-semibold">
-                    Receive Money
-                  </h5>
-                  <p className="text-sm font-bold text-primary-text">Rasel</p>
-                  <p className=" text-sm font-bold text-primary-text">
-                    01683311917
-                  </p>
-                </div>
-                <h4 className="text-lg font-bold text-primary-color">244 tk</h4>
-                <label className="inline-flex items-center cursor-pointer">
-                  <input type="checkbox" value="" className="sr-only peer" />
-                  <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                  {/* <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Checked toggle</span> */}
-                </label>
-              </li>
-              <li className="flex items-start justify-between ">
-                <div className="flex flex-col gap-.5">
-                  <h5 className="text-lg text-secondary-text font-semibold">
-                    Receive Money
-                  </h5>
-                  <p className="text-sm font-bold text-primary-text">Rasel</p>
-                  <p className=" text-sm font-bold text-primary-text">
-                    01683311917
-                  </p>
-                </div>
-                <h4 className="text-lg font-bold text-primary-color">244 tk</h4>
-                <label className="inline-flex items-center cursor-pointer">
-                  <input type="checkbox" value="" className="sr-only peer" />
-                  <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                  {/* <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Checked toggle</span> */}
-                </label>
-              </li>
+              {
+                userList?.map((item) => {
+                  return (
+                    <li  key={item._id} className="flex items-start justify-between border-b border-secondary-text pb-2 mb-2 last:pb-0 last:mb-0 last:border-none">
+                    <div className="flex flex-col gap-.5">
+                      <h5 className="text-lg text-secondary-text font-semibold">
+                       { item?.name}
+                      </h5>
+                      <p className="text-sm font-bold text-primary-text">{ item?.email}</p>
+                      <p className=" text-sm font-bold text-primary-text">
+                      {item?.mobileNumber}
+                      </p>
+                    </div>
+                    <h4 className="text-lg font-bold text-primary-color">{item?.balance} tk</h4>
+                 
+    
+                    <label className="inline-flex items-center cursor-pointer">
+                      <input defaultChecked={item?.active}      onChange={(e) => handleChange(e, item._id)} type="checkbox" value="" className="sr-only peer" />
+                      <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                      
+                    </label>
+                  </li>
+                  )
+                })
+              }
+       
             </ul>
           </div>
         </div>

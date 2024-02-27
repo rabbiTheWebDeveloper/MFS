@@ -105,37 +105,6 @@ const SignUp = () => {
               </select>
             </Field>
 
-            {/* <div className="mt-4">
-              <label
-                htmlFor=""
-                className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
-              >
-                Enter your Email
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your email"
-                className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
-              />
-            </div> */}
-
-            {/* <div className="mt-4">
-              <label
-                htmlFor=""
-                className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
-              >
-                Account Type
-              </label>
-
-              <select
-                name=""
-                id=""
-                className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
-              >
-                <option value="">User</option>
-                <option value="">Agent</option>
-              </select>
-            </div> */}
             <Field label="Enter your NID" error={errors.nid}>
               <input
                 {...register("nid", {
@@ -148,19 +117,7 @@ const SignUp = () => {
                 className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
               />
             </Field>
-            {/* <div className="mt-4">
-              <label
-                htmlFor=""
-                className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
-              >
-                Enter your NID
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your NID"
-                className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
-              />
-            </div> */}
+          
 
             <div className="mt-4">
               <button
