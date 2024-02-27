@@ -6,6 +6,7 @@ import { MdOutlineRealEstateAgent } from "react-icons/md";
 import { SiMoneygram } from "react-icons/si";
 import { TbDeviceMobileDollar } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import Form from "../components/Form/Form";
 
 const User = () => {
   return (
@@ -163,79 +164,7 @@ const User = () => {
               </div>
             </form>
           </div>
-              <div className="">
-            <form action="" className="mt-5">
-              <div className="">
-                <div className="mt-4">
-                  <label
-                    htmlFor=""
-                    className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
-                  >
-                    Mobile number
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter mobile number"
-                    className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
-                  />
-                </div>
-
-                <div className="mt-4">
-                  <label
-                    htmlFor=""
-                    className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
-                  >
-                    Amount
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter mobile number"
-                    className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
-                  />
-                </div>
-
-                <div className="mt-4">
-                  <label
-                    htmlFor=""
-                    className="inline-block mb-1 text-sm tab:text-base font-medium text-secondary-text"
-                  >
-                    Pin number
-                  </label>
-                  <div className="flex items-center justify-between gap-3">
-                    <input
-                      type="text"
-                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
-                    />
-                    <input
-                      type="text"
-                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
-                    />
-                    <input
-                      type="text"
-                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
-                    />
-                    <input
-                      type="text"
-                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
-                    />
-                    <input
-                      type="text"
-                      className="w-full py-2 px-3 text-center rounded-md text-sm tab:text-base border border-secondary-text"
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="submit"
-                    className="bg-primary-color py-2 tab:py-2.5 px-5 rounded-lg text-white font-medium text-lg w-full hover:bg-hover-color"
-                  >
-                    Pay
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+          <Form />
         </div>
       </section>
     </>
