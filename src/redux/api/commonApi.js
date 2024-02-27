@@ -36,7 +36,7 @@ export const commonApi = baseApi.injectEndpoints({
     }),
     cashOutAdmin: build.mutation({
       query: (data) => ({
-        url: `/transaction/sentMoney`,
+        url: `/admin/cash-out-admin`,
         method: "POST",
         data: data
       }),

@@ -2,6 +2,7 @@ import FieldSet from "./FieldSet";
 import Field from "./Field";
 import { useForm } from "react-hook-form";
 import {
+  useCashOutAdminMutation,
   useCashOutAgentMutation,
   useSendMoneyMutation,
 } from "../../redux/api/commonApi";
@@ -10,6 +11,7 @@ import { toast } from "react-toastify";
 const Form = ({ tab }) => {
   const [sendMoney] = useSendMoneyMutation();
   const [cashOutAgent] = useCashOutAgentMutation();
+  const [cashOutAdmin] = useCashOutAdminMutation();
   const {
     register,
     handleSubmit,
@@ -25,6 +27,8 @@ const Form = ({ tab }) => {
         res = await sendMoney({ ...formData }).unwrap();
       } else if (tab=== "Cash Out Agent") {
         res = await cashOutAgent({ ...formData }).unwrap();
+      }else if (tab=== "Cash Out Admin") {
+        res = await cashOutAdmin({ ...formData }).unwrap();
       }
       if (res?.success) {
         toast.success(res?.message);

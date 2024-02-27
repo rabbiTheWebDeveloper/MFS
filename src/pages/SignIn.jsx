@@ -1,68 +1,74 @@
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { storeUserInfo } from "../services/auth.service";
+import { useUserLoginMutation, useAdminLoginMutation, useAgentLoginMutation } from "../redux/api/authApi";
 import Field from "../components/Form/Field";
 import FieldSet from "../components/Form/FieldSet";
-import { useForm } from "react-hook-form";
-import { useUserLoginMutation } from "../redux/api/authApi";
-import { toast } from "react-toastify";
-import {  useNavigate } from "react-router-dom";
-import { storeUserInfo } from "../services/auth.service";
 
 const SignIn = () => {
-  const [userLogin] = useUserLoginMutation();
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    // setError,
-  } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const [userLogin] = useUserLoginMutation();
+  const [adminLogin] = useAdminLoginMutation();
+  const [agentLogin] = useAgentLoginMutation();
+
+  const loginMutations = {
+    User: userLogin,
+    Admin: adminLogin,
+    Agent: agentLogin,
+  };
+
   const submitForm = async (formData) => {
-    console.log(formData);
     try {
-      const res = await userLogin({ ...formData }).unwrap();
+      const { accountType, ...rest } = formData;
+      const res = await loginMutations[accountType]({ ...rest }).unwrap();
       if (res?.status) {
-        toast.success("User logged in successfully!");
+        toast.success(res?.message);
         navigate("/");
       }
       storeUserInfo("token", res?.token);
       storeUserInfo("user", JSON.stringify(res?.data));
-      console.log(res);
     } catch (err) {
       console.error(err.message);
     }
   };
+
+  const renderInputField = (name, label, type = "text") => (
+    <Field label={label} error={errors[name]}>
+      <input
+        {...register(name, { required: `${label} is required.` })}
+        type={type}
+        id={name}
+        name={name}
+        placeholder={`Enter ${label.toLowerCase()}`}
+        className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
+      />
+    </Field>
+  );
+
   return (
     <section className="min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] tab:w-[500px] p-5 tab:p-10 rounded-xl shadow-md bg-white">
-        <h2 className="text-3xl font-bold text-center text-primary-text">
-          Login
-        </h2>
-
+        <h2 className="text-3xl font-bold text-center text-primary-text">Login</h2>
         <form className="mt-5" onSubmit={handleSubmit(submitForm)}>
           <FieldSet>
-            <Field label=" Mobile number" error={errors.mobileNumber}>
-              <input
-                {...register("mobileNumber", {
-                  required: " Phone is required.",
-                })}
-                type="number"
-                id="mobileNumber"
-                name="mobileNumber"
-                placeholder="Enter mobile number"
+            {renderInputField("mobileNumber", "Mobile number", "number")}
+            <Field label="Account Type" error={errors.accountType}>
+              <select
+                {...register("accountType", { required: "Account Type is required." })}
+                name="accountType"
+                id="accountType"
                 className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
-              />
+              >
+                <option value="">Select account type</option>
+                <option value="User">User</option>
+                <option value="Agent">Agent</option>
+                <option value="Admin">Admin</option>
+              </select>
             </Field>
-            <Field label="Pin number" error={errors.pin}>
-              <input
-                {...register("pin", {
-                  required: "Pin Number is required.",
-                })}
-                type="password"
-                id="pin"
-                name="pin"
-                placeholder="Enter your pin"
-                className="w-full py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
-              />
-            </Field>
+            {renderInputField("pin", "Pin number", "password")}
             <div className="mt-4">
               <button
                 type="submit"

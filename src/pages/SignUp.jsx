@@ -1,11 +1,15 @@
 import { useForm } from "react-hook-form";
 import FieldSet from "../components/Form/FieldSet";
 import Field from "../components/Form/Field";
-import { useUserRegisterMutation } from "../redux/api/authApi";
-import {  useNavigate } from "react-router-dom";
+import {
+  useAgentRegisterMutation,
+  useUserRegisterMutation,
+} from "../redux/api/authApi";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const SignUp = () => {
   const [userRegister] = useUserRegisterMutation();
+  const [agentRegister] = useAgentRegisterMutation();
   const navigate = useNavigate();
   const {
     register,
@@ -14,15 +18,18 @@ const SignUp = () => {
     // setError,
   } = useForm();
 
-  const submitForm =async (formData) => {
+  const submitForm = async (formData) => {
     try {
-      const res = await userRegister({ ...formData }).unwrap();
+      let res;
+      if (formData.accountType === "User") {
+        res = await userRegister({ ...formData }).unwrap();
+      } else {
+        res = await agentRegister({ ...formData }).unwrap();
+      }
       if (res?.success) {
         toast.success("User registered in successfully!");
         navigate("/login");
       }
-      // storeUserInfo({ accessToken: res?.accessToken });
-      // console.log(res);
     } catch (err) {
       console.error(err.message);
     }
