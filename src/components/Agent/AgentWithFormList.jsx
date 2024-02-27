@@ -1,15 +1,18 @@
-import FieldSet from "./FieldSet";
-import Field from "./Field";
+
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import {
   useBalanceRequestListQuery,
   useBalanceRequestMutation,
+  useWithdrawRequesMutation,
+  useWithdrawRequestListQuery,
 } from "../../redux/api/agentApi";
+import FieldSet from "../Form/FieldSet";
+import Field from "../Form/Field";
 
-const RechargeFrom = ({ tab }) => {
-  const [balanceRequest] = useBalanceRequestMutation();
-  const { data } = useBalanceRequestListQuery();
+const AgentWithFormList = ({ tab }) => {
+  const [withdrawReques] = useWithdrawRequesMutation();
+  const { data } = useWithdrawRequestListQuery();
   const {
     register,
     handleSubmit,
@@ -24,8 +27,8 @@ const RechargeFrom = ({ tab }) => {
       if (tab.length === "") {
         return toast.error("Select an option Tab");
       }
-      if (tab === "Balance-recharge") {
-        res = await balanceRequest({ ...formData }).unwrap();
+      if (tab === "Withdraw request") {
+        res = await withdrawReques({ ...formData }).unwrap();
       }
       if (res?.success) {
         toast.success(res?.message);
@@ -57,7 +60,7 @@ const RechargeFrom = ({ tab }) => {
                 type="submit"
                 className="bg-primary-color py-2 tab:py-2.5 px-5 rounded-lg text-white font-medium text-lg w-full hover:bg-hover-color"
               >
-                Request Money
+                Withdraw request Money
               </button>
             </div>
           </FieldSet>
@@ -93,7 +96,7 @@ const RechargeFrom = ({ tab }) => {
                   <td className="px-6 py-4 whitespace-nowrap">{transaction._id}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{transaction.userId}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{transaction.amount}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{transaction.status}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{transaction.withdrawStatus}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{new Date(transaction.timestamp).toLocaleString()}</td>
                 </tr>
               ))}
@@ -105,4 +108,4 @@ const RechargeFrom = ({ tab }) => {
   );
 };
 
-export default RechargeFrom;
+export default AgentWithFormList;

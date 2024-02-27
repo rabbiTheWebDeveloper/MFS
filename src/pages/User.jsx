@@ -17,6 +17,8 @@ import { useEffect, useState } from "react";
 import LogOut from "../components/LogOut";
 import RechargeFrom from "../components/Form/RechargeFrom";
 import RechargeFromList from "../components/Form/RechargeFromList";
+import CashInRequest from "../components/Agent/CashInRequest";
+import AgentWithFormList from "../components/Agent/AgentWithFormList";
 
 const User = () => {
   const [tab, setTab] = useState("");
@@ -261,9 +263,16 @@ const User = () => {
           {tab === "Balance-recharge" ? (
             <RechargeFrom tab={tab} />
           ) : (
-           !( tab === "Balance-recharge List") &&
+           !( tab === "Balance-recharge List" || tab === "Cash Request" || tab === "Withdraw request") &&
             <Form tab={tab} />
           )}
+
+          {
+            tab === "Cash Request" && <CashInRequest tab={tab}/>
+          }
+            {
+            tab === "Withdraw request" && <AgentWithFormList tab={tab}/>
+          }
         </div>
       </section>
     </>
