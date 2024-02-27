@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { storeUserInfo } from "../services/auth.service";
 import { useUserLoginMutation, useAdminLoginMutation, useAgentLoginMutation } from "../redux/api/authApi";
 import Field from "../components/Form/Field";
@@ -79,6 +79,9 @@ const SignIn = () => {
             </div>
           </FieldSet>
         </form>
+        <div className="text-center mt-5">
+          <Link to="/signup" className="text-primary-color hover:text-hover-color">Create an account</Link>
+        </div>
       </div>
     </section>
   );

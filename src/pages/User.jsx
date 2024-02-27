@@ -5,28 +5,30 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineRealEstateAgent } from "react-icons/md";
 import { SiMoneygram } from "react-icons/si";
 import { MdOutlineAccountBalance } from "react-icons/md";
-import { CiLogout } from "react-icons/ci";
+
 // import { TbDeviceMobileDollar } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Form from "../components/Form/Form";
 import Balance from "../components/Balance";
 import { getUserInfo, isRole } from "../services/auth.service";
 import { useState } from "react";
+import LogOut from "../components/LogOut";
 
 const User = () => {
   const [tab, setTab] = useState("Send");
   const role = isRole();
-  const user = getUserInfo()
+  const user = getUserInfo();
   return (
     <>
       <section className="min-h-screen w-screen flex  gap-2 items-center justify-center">
         <div className="w-[90%] tab:w-[550px] p-5 tab:p-10 rounded-xl shadow-md bg-white">
-          <h3 className=" font-bold text-lg text-primary-text text-center">Welcom To {role} In MFS</h3>
-          <h3 className=" font-bold text-lg text-primary-text text-center">{user.name}</h3>
-          <button
-          >
-            <CiLogout  className="text-2xl" />
-          </button>
+          <h3 className=" font-bold text-lg text-primary-text text-center">
+            Welcom To {role} In MFS
+          </h3>
+          <h3 className=" font-bold text-lg text-primary-text text-center">
+            {user?.name}
+          </h3>
+          <LogOut />
           <div className="mb-7 flex items-center justify-between">
             <Balance />
             {role === "Admin" && (

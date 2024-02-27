@@ -5,7 +5,7 @@ import {
   useAgentRegisterMutation,
   useUserRegisterMutation,
 } from "../redux/api/authApi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const SignUp = () => {
   const [userRegister] = useUserRegisterMutation();
@@ -172,6 +172,9 @@ const SignUp = () => {
             </div>
           </FieldSet>
         </form>
+        <div className="text-center mt-5">
+          <Link to="/login" className="text-primary-color hover:text-hover-color"> Already have an account?</Link>
+        </div>
       </div>
     </section>
   );
