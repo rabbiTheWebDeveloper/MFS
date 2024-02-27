@@ -39,25 +39,10 @@ const routes = createBrowserRouter([
     element: <SignIn />,
   },
   {
-    path: "/agent/login",
-    element: <SignIn />,
-  },
-  {
-    path: "/admin/login",
-    element: <SignIn />,
-  },
-  {
     path: "/signup",
     element: <SignUp />,
   },
-  {
-    path: "/agent/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/admin/signup",
-    element: <SignUp />,
-  },
+
   {
     path: "/history",
     element: (

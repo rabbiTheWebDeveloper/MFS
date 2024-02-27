@@ -8,7 +8,8 @@ export const storeUserInfo = (name , value) => {
 }
 export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey)
-  const userToken = getFromLocalStorage(userKey)
+  let userToken = getFromLocalStorage(userKey)
+  userToken = JSON?.parse(userToken);
   // console.log(authToken);
   if (authToken) {
     // const decodedData = decodedToken(authToken);
