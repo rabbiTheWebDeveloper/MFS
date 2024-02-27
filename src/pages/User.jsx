@@ -7,6 +7,7 @@ import { SiMoneygram } from "react-icons/si";
 import { TbDeviceMobileDollar } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Form from "../components/Form/Form";
+import Balance from "../components/Balance";
 
 const User = () => {
   return (
@@ -14,9 +15,7 @@ const User = () => {
       <section className="min-h-screen w-screen flex  gap-2 items-center justify-center">
         <div className="w-[90%] tab:w-[550px] p-5 tab:p-10 rounded-xl shadow-md bg-white">
           <div className="mb-7 flex items-center justify-between">
-            <h3 className=" font-bold text-lg text-primary-text">
-              Your Balance <span className="text-primary-color">***</span>
-            </h3>
+            <Balance/>
             <Link
               to="/users-list"
               className="flex flex-col items-center gap-1 hover:text-primary-color"

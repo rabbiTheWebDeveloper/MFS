@@ -5,11 +5,16 @@ import SignUp from "../pages/SignUp";
 import History from "../pages/History";
 import UserList from "../pages/UserList";
 import AgentList from "../pages/AgentList";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PrivateRoute>
+        <App />
+      </PrivateRoute>
+    ),
     // children: [
     //   {
     //     index: true,
@@ -55,15 +60,27 @@ const routes = createBrowserRouter([
   },
   {
     path: "/history",
-    element: <History />,
+    element: (
+      <PrivateRoute>
+        <History />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/users-list",
-    element: <UserList />,
+    element: (
+      <PrivateRoute>
+        <UserList />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/agents-list",
-    element: <AgentList />,
+    element: (
+      <PrivateRoute>
+        <AgentList />
+      </PrivateRoute>
+    ),
   },
   // {
   //   path: '*',
