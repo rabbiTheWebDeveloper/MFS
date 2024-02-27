@@ -2,6 +2,10 @@
 
 This project is a simple Mobile Financial Service (MFS) application akin to popular platforms like bKash or Nagad.
 
+
+##Admin Account
+- 01641028312
+-pin : 6004
 ## Technologies Used
 
 - Node.js
