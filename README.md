@@ -1,8 +1,64 @@
-# React + Vite
+# Mobile Financial Service (MFS) Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple Mobile Financial Service (MFS) application akin to popular platforms like bKash or Nagad.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js
+- React
+- Express.js
+- MongoDB
+- Mongoose
+- JWT (JSON Web Tokens)
+
+## Features
+
+- User authentication with JWT
+- Registration and login for users, agents, and admin
+- User actions: send money, cash-out, balance inquiry
+- Agent actions: balance recharge, withdrawal request, balance inquiry
+- Admin actions: manage users and agents, approval of agents, withdrawal approval, balance inquiry
+- Transaction logging with unique transaction IDs
+
+## Installation
+
+### Backend
+
+1. Navigate to the `backend` directory.
+2. Run `npm install` to install dependencies.
+3. Configure environment variables (e.g., database connection).
+4. Run `npm start` to start the backend server.
+
+### Frontend
+
+1. Navigate to the `frontend` directory.
+2. Run `npm install` to install dependencies.
+3. Update API endpoint URLs if necessary.
+4. Run `npm start` to start the frontend development server.
+
+## Usage
+
+1. Register as a user or agent.
+2. Log in with your credentials.
+3. Perform desired actions such as sending money, cash-out, or balance inquiry.
+4. Admin can manage users and agents, approve agent requests, and view system information.
+
+## Additional Features
+
+- Cash request and withdrawal request for agents.
+- More detailed transaction history.
+- Enhanced security features.
+- UI/UX improvements.
+
+## Contributors
+
+- [S M AL RABBI](
+Frontend  gitHub  : https://github.com/rabbiTheWebDeveloper/MFS  ,
+Frontend Live Link  : https://mfs-coral.vercel.app
+Backend  github :  https://github.com/rabbiTheWebDeveloper/mfs-backend
+Backend live Link : https://mfs-backend.vercel.app/
+)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
