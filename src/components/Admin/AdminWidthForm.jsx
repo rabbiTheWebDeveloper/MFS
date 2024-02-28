@@ -61,7 +61,7 @@ const AdminWidthForm = () => {
                     <select
                       onChange={(e) => handleChange(e, transaction._id)}
                       name="accountType"
-                      defaultValue={transaction.status}
+                      defaultValue={transaction?.withdrawStatus}
                       id="accountType"
                       className="w-50 py-2 px-4 rounded-md text-sm tab:text-base border border-secondary-text"
                     >
