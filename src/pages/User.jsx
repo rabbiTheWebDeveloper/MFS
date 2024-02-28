@@ -30,8 +30,7 @@ const User = () => {
       setTab("Transfer from User");
     } else if (role === "User") {
       setTab("Send Money");
-    }
-    {
+    }else if (role === "Admin") {
       setTab("Transfer from User");
     }
   }, []);
