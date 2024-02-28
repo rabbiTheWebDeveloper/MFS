@@ -7,8 +7,6 @@ import { SiMoneygram } from "react-icons/si";
 import { MdOutlineAccountBalance } from "react-icons/md";
 import { IoCashOutline } from "react-icons/io5";
 import { BiMoneyWithdraw } from "react-icons/bi";
-
-// import { TbDeviceMobileDollar } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Form from "../components/Form/Form";
 import Balance from "../components/Balance";
@@ -19,6 +17,8 @@ import RechargeFrom from "../components/Form/RechargeFrom";
 import RechargeFromList from "../components/Form/RechargeFromList";
 import CashInRequest from "../components/Agent/CashInRequest";
 import AgentWithFormList from "../components/Agent/AgentWithFormList";
+import AdminCashIn from "../components/Admin/AdminCashIn";
+import AdminWidthForm from "../components/Admin/AdminWidthForm";
 
 const User = () => {
   const [tab, setTab] = useState("");
@@ -30,7 +30,8 @@ const User = () => {
       setTab("Transfer from User");
     } else if (role === "User") {
       setTab("Send Money");
-    }{
+    }
+    {
       setTab("Transfer from User");
     }
   }, []);
@@ -126,10 +127,10 @@ const User = () => {
                         : "bg-light-color text-primary-color "
                     } p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}
                   >
-                     <IoCashOutline />
+                    <IoCashOutline />
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
-                   Cash Request
+                    Cash Request
                   </h5>
                 </div>
                 <div
@@ -143,11 +144,10 @@ const User = () => {
                         : "bg-light-color text-primary-color "
                     } p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}
                   >
-                   
                     <BiMoneyWithdraw />
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
-                  Withdraw request 
+                    Withdraw request
                   </h5>
                 </div>
               </>
@@ -211,24 +211,34 @@ const User = () => {
 
             {role === "Admin" && (
               <>
-                <div className="text-center cursor-pointer" onClick={() => setTab("Transfer from Admin to User")}>
-                  <div className={`${
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Transfer from Admin to User")}
+                >
+                  <div
+                    className={`${
                       tab === "Transfer from Admin to User"
                         ? "bg-primary-color text-white"
                         : "bg-light-color text-primary-color "
-                    } p-2 rounded-lg w-20 h-16 text-4xl flex items-center justify-center m-auto`}>
+                    } p-2 rounded-lg w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
                     <SiMoneygram />
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
                     Transfer Money User
                   </h5>
                 </div>
-                <div className="text-center cursor-pointer" onClick={() => setTab("Transfer from Agent")}>
-                  <div className={`${
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Transfer from Agent")}
+                >
+                  <div
+                    className={`${
                       tab === "Transfer from Agent"
                         ? "bg-primary-color text-white"
                         : "bg-light-color text-primary-color "
-                    } w-20 h-16 text-4xl flex items-center justify-center m-auto`}>
+                    } w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
                     <SiMoneygram />
                   </div>
                   <h5 className="text-xs font-bold mt-2 text-primary-text">
@@ -252,27 +262,63 @@ const User = () => {
                     Balance-recharge
                   </h5>
                 </div>
+
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Cash Request Update")}
+                >
+                  <div
+                    className={`${
+                      tab === "Cash Request Update"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
+                    <IoCashOutline />
+                  </div>
+                  <h5 className="text-xs font-bold mt-2 text-primary-text">
+                    Cash Request Update
+                  </h5>
+                </div>
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => setTab("Withdraw request Update")}
+                >
+                  <div
+                    className={`${
+                      tab === "Withdraw request Update"
+                        ? "bg-primary-color text-white"
+                        : "bg-light-color text-primary-color "
+                    } p-2 rounded-lg   w-20 h-16 text-4xl flex items-center justify-center m-auto`}
+                  >
+                    <BiMoneyWithdraw />
+                  </div>
+                  <h5 className="text-xs font-bold mt-2 text-primary-text">
+                    Withdraw request Update
+                  </h5>
+                </div>
               </>
             )}
           </div>
 
           {/* tab form  */}
-          {tab === "Balance-recharge List" && (
-            <RechargeFromList/>
-          )}
+          {tab === "Balance-recharge List" && <RechargeFromList />}
           {tab === "Balance-recharge" ? (
             <RechargeFrom tab={tab} />
           ) : (
-           !( tab === "Balance-recharge List" || tab === "Cash Request" || tab === "Withdraw request") &&
-            <Form tab={tab} />
+            !(
+              tab === "Balance-recharge List" ||
+              tab === "Cash Request" ||
+              tab === "Withdraw request" ||
+              tab === "Cash Request Update" ||
+              tab === "Withdraw request Update"
+            ) && <Form tab={tab} />
           )}
 
-          {
-            tab === "Cash Request" && <CashInRequest tab={tab}/>
-          }
-            {
-            tab === "Withdraw request" && <AgentWithFormList tab={tab}/>
-          }
+          {tab === "Cash Request" && <CashInRequest tab={tab} />}
+          {tab === "Withdraw request" && <AgentWithFormList tab={tab} />}
+          {tab === "Cash Request Update" && <AdminCashIn tab={tab} />}
+          {tab === "Withdraw request Update" && <AdminWidthForm tab={tab} />}
         </div>
       </section>
     </>

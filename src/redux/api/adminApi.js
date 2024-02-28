@@ -31,7 +31,6 @@ export const adminApi = baseApi.injectEndpoints({
       // invalidatesTags: ["user"]
     }),
 
-
     userList: build.query({
       query: () => ({
         url: `/admin/user-list`,
@@ -72,9 +71,43 @@ export const adminApi = baseApi.injectEndpoints({
       // invalidatesTags: ["balance-recharge"],
       // invalidatesTags: ["user"]
     }),
+    cashinApprove: build.mutation({
+      query: (data) => ({
+        url: `/cash-in-request/${data.id}`,
+        method: "PUT",
+        data: data.body
+      }),
+      invalidatesTags: ["balance-recharge"],
+      // invalidatesTags: ["user"]
+    }),
+    withdrowApprove: build.mutation({
+      query: (data) => ({
+        url: `/withdraw/${data.id}`,
+        method: "PUT",
+        data: data.body
+      }),
+      invalidatesTags: ["balance-recharge"],
+      // invalidatesTags: ["user"]
+    }),
+    withdrowAminList: build.query({
+      query: () => ({
+        url: `/withdraw/admin`,
+        method: "GET",
+      }),
+      providesTags: ["balance-recharge-list"],
+
+    }),
+    cashInAminList: build.query({
+      query: () => ({
+        url: `/cash-in-request/admin`,
+        method: "GET",
+      }),
+      providesTags: ["balance-recharge-list"],
+
+    }),
 
   }),
 
 })
 
-export const { useUserStatusMutation, useAgentApproveMutation, useCashOutAdminTOAgentMutation, useCashOutAdminTOUserMutation, useUserListQuery, useAgentListQuery, useRechargeAccepedMutation, useBalanceRechargeListQuery } = adminApi
+export const { useCashInAminListQuery,useCashinApproveMutation,useWithdrowAminListQuery,useWithdrowApproveMutation, useUserStatusMutation, useAgentApproveMutation, useCashOutAdminTOAgentMutation, useCashOutAdminTOUserMutation, useUserListQuery, useAgentListQuery, useRechargeAccepedMutation, useBalanceRechargeListQuery } = adminApi
